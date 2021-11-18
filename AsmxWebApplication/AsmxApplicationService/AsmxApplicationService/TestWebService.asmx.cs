@@ -40,7 +40,7 @@ namespace AsmxApplicationService
         }
 
         [WebMethod]
-        public Individual Test(Individual individual)
+        public Individual GetTestObject(Individual individual)
         {
             return individual;
         }

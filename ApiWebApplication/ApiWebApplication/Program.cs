@@ -14,6 +14,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Description = "Docs for my API", Version = "v1" });
+
+    
 });
 
 builder.Services.AddDbContext<ApplicationDbContext>(o => o.UseInMemoryDatabase("ApplicationDbContext"));

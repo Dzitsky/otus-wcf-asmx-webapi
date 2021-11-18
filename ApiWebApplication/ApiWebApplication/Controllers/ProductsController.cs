@@ -25,6 +25,12 @@ namespace ApiWebApplication.Controllers
         }
 
         // GET api/<ProductsController>/5
+
+        /// <summary>
+        /// Test
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {

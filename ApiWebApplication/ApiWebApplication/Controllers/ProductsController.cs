@@ -35,7 +35,7 @@ namespace ApiWebApplication.Controllers
         public IActionResult Get(int id)
         {
             var product = _context.Products.SingleOrDefault(p => p.Id == id);
-            if(product != null)
+            if (product != null)
             {
                 return Ok(product);
             }
@@ -54,17 +54,38 @@ namespace ApiWebApplication.Controllers
         }
 
         // PUT api/<ProductsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut()]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Put([FromBody] Product product)
         {
-            throw new NotImplementedException();
+            var currentProduct = await _context.Products.FindAsync(product.Id);
+            if (currentProduct == null)
+            {
+                return NotFound();
+            }
+
+            currentProduct.Name = product.Name;
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
 
         // DELETE api/<ProductsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            throw new NotImplementedException();
+            var product = await this._context.Products.FindAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            _context.Remove(product);
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
     }
 }

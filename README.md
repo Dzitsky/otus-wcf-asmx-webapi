@@ -1,1 +1,1 @@
-# dotnet-6-course
+# Test Sample
